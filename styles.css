@@ -1,0 +1,136 @@
+/* ============================================================
+   COLORES: cámbialos aquí. Estilo neón retro (synthwave).
+   ============================================================ */
+.neon{
+  --fondo-tarjeta:rgba(16,4,44,.84);  /* tarjeta oscura */
+  --fondo-campo:rgba(255,255,255,.07);/* fondo de los campos */
+  --texto:#fff;                       /* texto */
+  --rosa:#ff2fa6;                     /* rosa neón */
+  --morado:#b026ff;                   /* morado neón */
+  --celeste:#5df2ff;                  /* celeste neón */
+  --ok:#19e68c;                       /* "todo está en orden" */
+  --error:#ff4d4d;                    /* error */
+  --error-texto:#ff9b9b;              /* mensajes de error */
+}
+
+/* ---- Solo para ver el formulario solo: fondo con sol y piso de rejilla.
+        BORRA todo este bloque si lo pegas en tu página. ---- */
+html,body{overflow-x:hidden}
+body{
+  margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:28px 20px; background:linear-gradient(180deg,#07011a 0%,#24075a 55%,#5a1486 100%);
+}
+body::before{ /* sol con rayas */
+  content:""; position:fixed; left:50%; bottom:calc(36vh - 120px); width:340px; height:340px; margin-left:-170px;
+  border-radius:50%; z-index:0;
+  background:linear-gradient(180deg,#ffe45e 10%,#ff6a3d 45%,#ff2fa6 75%,#b026ff 100%);
+  -webkit-mask-image:linear-gradient(180deg,#000 0 50%,transparent 50% 55%,#000 55% 63%,transparent 63% 69%,#000 69% 76%,transparent 76% 83%,#000 83% 90%,transparent 90% 100%);
+          mask-image:linear-gradient(180deg,#000 0 50%,transparent 50% 55%,#000 55% 63%,transparent 63% 69%,#000 69% 76%,transparent 76% 83%,#000 83% 90%,transparent 90% 100%);
+}
+body::after{ /* piso de rejilla */
+  content:""; position:fixed; left:-60%; right:-60%; bottom:0; height:36vh; z-index:0;
+  background-color:#0d0226;
+  background-image:linear-gradient(rgba(255,47,166,.75) 1px,transparent 1px),linear-gradient(90deg,rgba(255,47,166,.75) 1px,transparent 1px);
+  background-size:64px 40px;
+  transform:perspective(260px) rotateX(58deg); transform-origin:center top;
+  border-top:2px solid var(--celeste,#5df2ff); box-shadow:0 -6px 30px rgba(93,242,255,.6);
+}
+
+/* ---- Tarjeta ---- */
+.neon{
+  box-sizing:border-box; position:relative; z-index:1; width:100%; max-width:520px; padding:26px 24px 28px;
+  background:var(--fondo-tarjeta); color:var(--texto);
+  border:2px solid var(--rosa); border-radius:22px;
+  box-shadow:0 0 0 1px rgba(255,47,166,.35), 0 0 30px rgba(255,47,166,.5), inset 0 0 28px rgba(93,242,255,.12);
+  backdrop-filter:blur(8px);
+  font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  color-scheme:dark;
+}
+.neon *{box-sizing:border-box}
+
+/* ---- Cabecera ---- */
+.neon-cab{display:flex; justify-content:space-between; align-items:flex-end; gap:14px; margin-bottom:22px}
+.neon-tag{margin:0 0 6px; font-size:.74rem; font-weight:700; letter-spacing:.3em; text-transform:uppercase; color:var(--celeste)}
+.neon h1{
+  margin:0 0 6px; font-size:2.1rem; line-height:1.05; font-style:italic; font-weight:900; text-transform:uppercase;
+  letter-spacing:.02em; color:#fff;
+  text-shadow:0 0 6px #fff, 0 0 16px var(--rosa), 0 0 34px var(--rosa);
+}
+.neon-sub{margin:0; font-size:.92rem; color:#d9cff5; line-height:1.4}
+
+/* ---- Ecualizador animado ---- */
+.eq{flex:none; display:flex; align-items:flex-end; gap:4px; height:52px}
+.eq i{
+  width:7px; height:100%; border-radius:4px; transform-origin:bottom;
+  background:linear-gradient(180deg,var(--celeste),var(--rosa)); box-shadow:0 0 10px rgba(93,242,255,.6);
+  animation:eq .9s ease-in-out infinite alternate;
+}
+.eq i:nth-child(1){animation-duration:.7s}
+.eq i:nth-child(2){animation-duration:1.1s; animation-delay:-.3s}
+.eq i:nth-child(3){animation-duration:.85s; animation-delay:-.5s}
+.eq i:nth-child(4){animation-duration:1.25s; animation-delay:-.2s}
+.eq i:nth-child(5){animation-duration:.95s; animation-delay:-.6s}
+@keyframes eq{from{transform:scaleY(.2)} to{transform:scaleY(1)}}
+
+/* ---- Campos ---- */
+.neon .campo{margin-bottom:16px; min-width:0}
+.neon .fila{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.neon label{display:block; margin-bottom:6px; font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--celeste)}
+.neon input,.neon select{
+  width:100%; padding:12px 14px; font-size:1rem; font-family:inherit; color:var(--texto);
+  background:var(--fondo-campo); border:1.5px solid rgba(93,242,255,.5); border-radius:12px;
+}
+.neon input::placeholder{color:#8f84b8}
+.neon input:focus-visible,.neon select:focus-visible{
+  outline:2px solid #fff; outline-offset:1px; border-color:var(--rosa); box-shadow:0 0 16px rgba(255,47,166,.7);
+}
+.neon .malo{border-color:var(--error); box-shadow:0 0 12px rgba(255,77,77,.55)}
+
+.neon .fecha{display:grid; grid-template-columns:.85fr 1.4fr 1fr; gap:8px}
+.neon .fecha select{padding:12px 8px}
+
+/* ---- Correo: usuario @ proveedor .com ---- */
+.neon .correo{
+  display:flex; align-items:center; gap:2px; padding:0 14px;
+  background:var(--fondo-campo); border:1.5px solid rgba(93,242,255,.5); border-radius:12px;
+}
+.neon .correo:focus-within{outline:2px solid #fff; outline-offset:1px; border-color:var(--rosa); box-shadow:0 0 16px rgba(255,47,166,.7)}
+.neon .correo input{border:0; background:transparent; padding:12px 2px; min-width:0; box-shadow:none}
+.neon .correo input:focus-visible{outline:0; box-shadow:none}
+.neon .correo-fijo{font-weight:800; color:var(--rosa); text-shadow:0 0 10px var(--rosa)}
+
+.neon .msg{display:block; min-height:1.1em; margin-top:5px; font-size:.8rem; font-weight:700; color:var(--error-texto)}
+
+/* ---- Botón neón ---- */
+.neon button,.neon .boton-volver{
+  display:block; width:100%; margin-top:8px; padding:14px; cursor:pointer; text-align:center; text-decoration:none;
+  font-family:inherit; font-size:1.1rem; font-weight:900; letter-spacing:.16em; text-transform:uppercase;
+  color:#14022e; background:linear-gradient(90deg,var(--rosa),var(--morado)); border:0; border-radius:14px;
+  box-shadow:0 0 22px rgba(255,47,166,.65); transition:transform .15s, box-shadow .15s, background .2s;
+}
+.neon button:hover,.neon .boton-volver:hover{transform:translateY(-2px); box-shadow:0 0 34px rgba(255,47,166,.9)}
+.neon button:active,.neon .boton-volver:active{transform:translateY(1px)}
+.neon button:focus-visible,.neon .boton-volver:focus-visible{outline:3px solid #fff; outline-offset:3px}
+.neon button.ok{background:linear-gradient(90deg,var(--ok),#14c8d4); color:#04201a; box-shadow:0 0 24px rgba(25,230,140,.7)}
+.neon button.error{background:var(--error); color:#fff; box-shadow:0 0 24px rgba(255,77,77,.7)}
+
+/* ---- Página de éxito ---- */
+.neon-exito{text-align:center; padding-top:6px}
+.neon .check{
+  width:96px; height:96px; margin:4px auto 26px; display:grid; place-items:center;
+  font-size:3.2rem; font-weight:900; color:var(--ok); border:3px solid var(--ok); border-radius:50%;
+  text-shadow:0 0 14px var(--ok); box-shadow:0 0 26px rgba(25,230,140,.7), inset 0 0 22px rgba(25,230,140,.35);
+  animation:pop .55s cubic-bezier(.2,1.6,.4,1) both;
+}
+@keyframes pop{from{transform:scale(.3); opacity:0} to{transform:scale(1); opacity:1}}
+
+@media (max-width:440px){
+  .neon .fila{grid-template-columns:1fr; gap:0}
+  .neon h1{font-size:1.7rem}
+  .eq{height:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  .eq i,.neon .check{animation:none}
+  .eq i{transform:scaleY(.7)}
+  .neon button{transition:none}
+}

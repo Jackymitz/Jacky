@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validación exitosa</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<section class="neon">
+  <header class="neon-cab">
+    <div>
+      <p class="neon-tag">Validación</p>
+      <h1>¡Todo se hizo correctamente!</h1>
+      <p class="neon-sub">La validación fue exitosa y tus datos se enviaron.</p>
+    </div>
+    <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  </header>
+
+  <div class="neon-cuerpo neon-exito">
+    <div class="check" aria-hidden="true">✓</div>
+
+    <!-- CAMBIA href por la dirección de tu página de música.
+         '../index.html' funciona si esta carpeta está dentro de la carpeta de tu página. -->
+    <a class="boton-volver" href="../index.html?suscrito=1">Volver a mi Spotify</a>
+    <p class="neon-sub">Te regresaremos a la página principal en 3 segundos…</p>
+  </div>
+</section>
+
+<script>
+  // Marca al usuario como suscrito y vuelve a la página principal en 3 segundos
+  try { localStorage.setItem('suscrito', '1'); } catch (e) {}
+  setTimeout(function () {
+    window.location.href = '../index.html?suscrito=1';
+  }, 3000);
+</script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suscríbete | Music hip hop</title>
+  <!-- Usa los mismos colores de tu página (variables de style.css) -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { display: grid; place-items: start center; padding: 32px 16px; }
+
+    .form-caja {
+      width: 100%;
+      max-width: 560px;
+      background: var(--panel);
+      border: 1px solid var(--linea);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .45);
+    }
+    .form-cab {
+      padding: 28px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(255, 93, 143, .55), transparent 45%),
+        radial-gradient(circle at 10% 90%, rgba(124, 92, 255, .6), transparent 50%),
+        var(--tarjeta);
+    }
+    .form-cab h1 { font-size: 1.7rem; margin-bottom: 6px; }
+    .form-cab p  { color: var(--texto-suave); }
+
+    form { padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 16px; }
+
+    .f-campo { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
+    .f-fila  { display: flex; gap: 14px; }
+    @media (max-width: 520px) { .f-fila { flex-direction: column; } }
+
+    label { font-size: .9rem; font-weight: 600; color: var(--texto); }
+
+    input[type="text"], input[type="date"] {
+      width: 100%;
+      height: 46px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 2px solid transparent;
+      background: var(--tarjeta);
+      color: var(--texto);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .2s;
+      color-scheme: dark;
+    }
+    input:focus, .correo:focus-within { border-color: var(--acento-2); }
+    .invalido { border-color: #ff5d5d !important; }
+    .valido   { border-color: #3ad6c6 !important; }
+
+    .correo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 12px;
+      border: 2px solid transparent;
+      background: var(--tarjeta);
+      padding-right: 14px;
+    }
+    .correo input { background: transparent; border: none; border-radius: 12px; }
+    .correo-fijo { color: var(--texto-suave); font-weight: 600; }
+
+    .msg { min-height: 16px; font-size: .8rem; color: #ff8a8a; }
+
+    #btn {
+      height: 50px;
+      border: none;
+      border-radius: 99px;
+      background: var(--degradado);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 93, 143, .4);
+      transition: transform .2s;
+    }
+    #btn:hover { transform: scale(1.03); }
+    #btn:disabled { opacity: .6; cursor: default; transform: none; }
+
+    .volver { text-align: center; color: var(--texto-suave); font-size: .9rem; }
+    .volver:hover { color: var(--texto); }
+
+    /* Mensaje de éxito */
+    .exito { display: none; padding: 40px 28px; text-align: center; }
+    .exito .check {
+      width: 80px; height: 80px; margin: 0 auto 18px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      background: var(--degradado);
+      font-size: 2.4rem; color: #fff;
+      box-shadow: 0 10px 28px rgba(124, 92, 255, .5);
+    }
+    .exito h2 { margin-bottom: 8px; }
+    .exito p  { color: var(--texto-suave); }
+    .mostrar-exito form, .mostrar-exito .form-cab { display: none; }
+    .mostrar-exito .exito { display: block; }
+  </style>
+</head>
+<body>
+
+<main class="form-caja" id="caja">
+  <header class="form-cab">
+    <h1>Únete al ritmo 🎧</h1>
+    <p>Llena tus datos y suscríbete a Music hip hop.</p>
+  </header>
+
+  <form id="form" novalidate autocomplete="off">
+
+    <div class="f-campo">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" type="text" maxlength="60">
+      <span class="msg" id="m-nombre"></span>
+    </div>
+
+    <div class="f-fila">
+      <div class="f-campo">
+        <label for="paterno">Apellido paterno</label>
+        <input id="paterno" type="text" maxlength="60">
+        <span class="msg" id="m-paterno"></span>
+      </div>
+      <div class="f-campo">
+        <label for="materno">Apellido materno</label>
+        <input id="materno" type="text" maxlength="60">
+        <span class="msg" id="m-materno"></span>
+      </div>
+    </div>
+
+    <div class="f-campo">
+      <label for="fecha">Fecha de nacimiento</label>
+      <input id="fecha" type="date">
+      <span class="msg" id="m-fecha"></span>
+    </div>
+
+    <div class="f-campo">
+      <label for="tarjeta">Número de tarjeta</label>
+      <input id="tarjeta" type="text" inputmode="numeric" placeholder="0000 0000 0000 0000" maxlength="19">
+      <span class="msg" id="m-tarjeta"></span>
+    </div>
+
+    <div class="f-campo">
+      <label for="usuario">Correo electrónico</label>
+      <div class="correo" id="correo">
+        <input id="usuario" type="text" placeholder="tunombre" aria-label="Usuario del correo">
+        <span class="correo-fijo">@</span>
+        <input id="dominio" type="text" list="dominios" placeholder="gmail" aria-label="Proveedor del correo">
+        <span class="correo-fijo">.com</span>
+      </div>
+      <datalist id="dominios">
+        <option value="gmail"></option>
+        <option value="hotmail"></option>
+        <option value="outlook"></option>
+        <option value="yahoo"></option>
+        <option value="icloud"></option>
+        <option value="live"></option>
+      </datalist>
+      <span class="msg" id="m-correo"></span>
+    </div>
+
+    <button type="button" id="btn">Validar</button>
+    <a class="volver" href="musica.html">← Volver a la página principal</a>
+  </form>
+
+  <section class="exito" aria-live="polite">
+    <div class="check" aria-hidden="true">✓</div>
+    <h2>¡Validación exitosa!</h2>
+    <p>Ya estás suscrito. Te regresamos a la página principal…</p>
+  </section>
+</main>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+
+  /* ---------- Escribir solo lo permitido ---------- */
+  // Nombre y apellidos: solo letras (con acentos, ñ), espacios, apóstrofo y guion
+  ["nombre", "paterno", "materno"].forEach((id) => {
+    $(id).addEventListener("input", () => {
+      $(id).value = $(id).value.replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]/g, "");
+    });
+  });
+
+  // Tarjeta: solo números, en grupos de 4
+  $("tarjeta").addEventListener("input", () => {
+    const n = $("tarjeta").value.replace(/\D/g, "").slice(0, 16);
+    $("tarjeta").value = n.replace(/(.{4})/g, "$1 ").trim();
+  });
+
+  // Correo: sin espacios ni @ ni .com (ya vienen fijos)
+  $("usuario").addEventListener("input", () => {
+    $("usuario").value = $("usuario").value.replace(/[^A-Za-z0-9._%+-]/g, "");
+  });
+  $("dominio").addEventListener("input", () => {
+    $("dominio").value = $("dominio").value.replace(/[^A-Za-z0-9-]/g, "").toLowerCase();
+  });
+
+  // La fecha no puede ser futura
+  const hoy = new Date().toISOString().split("T")[0];
+  $("fecha").max = hoy;
+
+  /* ---------- Validación ---------- */
+  function marcar(caja, msgId, error) {
+    $(msgId).textContent = error || "";
+    caja.classList.toggle("invalido", !!error);
+    caja.classList.toggle("valido", !error);
+    return !error;
+  }
+
+  function validarNombre(id, etiqueta) {
+    const v = $(id).value.trim();
+    let e = "";
+    if (!v) e = `Escribe tu ${etiqueta}.`;
+    else if (v.length < 2) e = `El ${etiqueta} es muy corto.`;
+    return marcar($(id), "m-" + id, e);
+  }
+
+  function validarFecha() {
+    const v = $("fecha").value;
+    let e = "";
+    if (!v) e = "Elige tu fecha de nacimiento.";
+    else if (v > hoy) e = "La fecha no puede ser futura.";
+    else {
+      const nac = new Date(v), t = new Date();
+      let edad = t.getFullYear() - nac.getFullYear();
+      const m = t.getMonth() - nac.getMonth();
+      if (m < 0 || (m === 0 && t.getDate() < nac.getDate())) edad--;
+      if (edad < 18) e = "Debes ser mayor de 18 años para suscribirte.";
+      else if (edad > 120) e = "Revisa el año de nacimiento.";
+    }
+    return marcar($("fecha"), "m-fecha", e);
+  }
+
+  function validarTarjeta() {
+    const n = $("tarjeta").value.replace(/\D/g, "");
+    let e = "";
+    if (!n) e = "Escribe el número de tu tarjeta.";
+    else if (n.length !== 16) e = "La tarjeta debe tener 16 dígitos.";
+    return marcar($("tarjeta"), "m-tarjeta", e);
+  }
+
+  function validarCorreo() {
+    const u = $("usuario").value.trim();
+    const d = $("dominio").value.trim();
+    let e = "";
+    if (!u || !d) e = "Completa tu correo (usuario y proveedor).";
+    else if (!/^[A-Za-z0-9][A-Za-z0-9._%+-]*$/.test(u)) e = "El usuario del correo no es válido.";
+    else if (!/^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/.test(d)) e = "El proveedor del correo no es válido.";
+    $("correo").classList.toggle("invalido", !!e);
+    $("correo").classList.toggle("valido", !e);
+    $("m-correo").textContent = e;
+    return !e;
+  }
+
+  /* ---------- Botón Validar ---------- */
+  $("btn").addEventListener("click", () => {
+    // Se evalúan todos (sin cortar en el primero) para mostrar todos los errores
+    const resultados = [
+      validarNombre("nombre", "nombre"),
+      validarNombre("paterno", "apellido paterno"),
+      validarNombre("materno", "apellido materno"),
+      validarFecha(),
+      validarTarjeta(),
+      validarCorreo(),
+    ];
+    if (!resultados.every(Boolean)) return;
+
+    // Todo correcto: marcamos la suscripción (solo se guarda el aviso, NO los datos de la tarjeta)
+    try { localStorage.setItem("suscrito", "1"); } catch (e) {}
+
+    $("btn").disabled = true;
+    $("caja").classList.add("mostrar-exito");
+
+    // Espera 3 segundos y regresa a la página principal
+    setTimeout(() => {
+      window.location.href = "musica.html?suscrito=1";
+    }, 3000);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+/* ============================================================
+   COLORES: tomados de tu página "Mi music".
+   Cámbialos aquí si quieres ajustar el tono.
+   ============================================================ */
+.registro{
+  --fondo-tarjeta:linear-gradient(145deg,#1f2366 0%,#363889 55%,#6a54a8 100%); /* tarjeta azul-morada */
+  --fondo-campo:rgba(14,16,56,.55);   /* campos de cristal oscuro */
+  --texto:#e8f1f4;                    /* texto claro, como el título de tu canción */
+  --texto-suave:#b9bde6;              /* texto secundario */
+  --etiqueta:#86e6f0;                 /* celeste, como "MILLONARIO" */
+  --linea:rgba(190,175,255,.28);      /* bordes suaves */
+  --acento:#eaa6ee;                   /* rosa lavanda de tus botones */
+  --acento-2:#c3a5f3;                 /* lila del degradado del botón */
+  --ok:#5be3a8;                       /* "todo está en orden" */
+  --error:#ff5d5d;                    /* error */
+  --error-texto:#ff9a9a;              /* mensajes de error sobre el fondo */
+}
+
+/* Solo para ver el formulario solo. BORRA este bloque si lo pegas en tu página. */
+body{
+  margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:20px; background:radial-gradient(circle at 20% 10%,#262a78 0%,#14173f 55%,#0d0f2b 100%);
+}
+
+.registro{
+  box-sizing:border-box; width:100%; max-width:540px; padding:30px 26px;
+  background:var(--fondo-tarjeta); color:var(--texto);
+  border:1px solid var(--linea); border-radius:28px;
+  box-shadow:0 18px 50px rgba(5,6,30,.55);
+  font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  color-scheme:dark;
+}
+.registro *{box-sizing:border-box}
+
+/* ---- Cabecera con el disco de vinilo ---- */
+.registro-cabecera{display:flex; align-items:center; gap:18px; margin-bottom:26px}
+.registro h1{margin:0 0 4px; font-size:1.6rem; font-weight:700}
+.registro-cabecera p{margin:0; color:var(--texto-suave); font-size:.92rem; line-height:1.4}
+
+.vinilo{
+  flex:none; width:84px; height:84px; border-radius:50%; position:relative;
+  background:
+    radial-gradient(circle, #14173f 0 4%, var(--acento) 5% 22%, #0d0f2b 23% 25%, transparent 26%),
+    repeating-radial-gradient(circle, #0d0f2b 0 3px, #262a6b 4px 5px);
+  box-shadow:0 0 0 2px var(--linea), 0 6px 18px rgba(5,6,30,.5);
+  animation:giro 7s linear infinite;
+}
+.vinilo::after{ /* brillo del disco */
+  content:""; position:absolute; inset:0; border-radius:50%;
+  background:conic-gradient(from 20deg, transparent 0 20%, rgba(255,255,255,.14) 25%, transparent 30% 70%, rgba(255,255,255,.14) 75%, transparent 80%);
+}
+@keyframes giro{to{transform:rotate(360deg)}}
+
+/* ---- Campos ---- */
+.registro .campo{margin-bottom:16px; min-width:0}
+.registro .fila{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.registro label{display:block; margin:0 0 6px 6px; font-size:.86rem; font-weight:700; color:var(--etiqueta)}
+
+.registro input,
+.registro select{
+  width:100%; padding:12px 18px; font-size:1rem; font-family:inherit;
+  color:var(--texto); background:var(--fondo-campo);
+  border:1.5px solid var(--linea); border-radius:999px;
+  backdrop-filter:blur(6px);
+}
+.registro input::placeholder{color:#8d92c8}
+.registro input:focus-visible,
+.registro select:focus-visible{outline:2px solid var(--acento); outline-offset:1px; border-color:var(--acento)}
+.registro .malo{border-color:var(--error)}
+
+/* ---- Fecha: día, mes y año ---- */
+.registro .fecha{display:grid; grid-template-columns:.85fr 1.4fr 1fr; gap:8px}
+.registro .fecha select{padding:12px 10px}
+
+/* ---- Correo: usuario @ proveedor .com ---- */
+.registro .correo{
+  display:flex; align-items:center; gap:2px; padding:0 18px;
+  background:var(--fondo-campo); border:1.5px solid var(--linea); border-radius:999px;
+  backdrop-filter:blur(6px);
+}
+.registro .correo:focus-within{border-color:var(--acento); outline:2px solid var(--acento); outline-offset:1px}
+.registro .correo.malo{border-color:var(--error)}
+.registro .correo input{border:0; outline:0; background:transparent; padding:12px 2px; min-width:0; border-radius:0; backdrop-filter:none}
+.registro .correo input:focus-visible{outline:0}
+.registro .correo-fijo{color:var(--acento); font-weight:700}
+
+/* ---- Mensajes de error ---- */
+.registro .msg{display:block; min-height:1.1em; margin:5px 0 0 8px; font-size:.8rem; color:var(--error-texto)}
+
+/* ---- Botón ---- */
+.registro button{
+  width:100%; margin-top:8px; padding:14px; font-size:1.05rem; font-weight:700; font-family:inherit;
+  color:#241a4d; background:linear-gradient(90deg,var(--acento),var(--acento-2));
+  border:0; border-radius:999px; cursor:pointer;
+  box-shadow:0 8px 22px rgba(234,166,238,.28);
+  transition:background .2s, color .2s;
+}
+.registro button:focus-visible{outline:2px solid var(--texto); outline-offset:3px}
+.registro button.ok{background:var(--ok); color:#0c2b20}
+.registro button.error{background:var(--error); color:#fff}
+
+@media (max-width:440px){
+  .registro .fila{grid-template-columns:1fr; gap:0}
+  .registro-cabecera{flex-direction:column; align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  .vinilo{animation:none}
+}
